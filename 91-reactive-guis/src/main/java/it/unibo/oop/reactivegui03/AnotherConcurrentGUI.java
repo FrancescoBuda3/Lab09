@@ -51,11 +51,10 @@ public final class AnotherConcurrentGUI extends JFrame {
         new Thread(() -> {
             try {
                 Thread.sleep(10_000);
-                AnotherConcurrentGUI.this.stop.doClick();
-            } catch (InterruptedException ex) {
+                SwingUtilities.invokeAndWait(() -> AnotherConcurrentGUI.this.stop.doClick());
+            } catch (InvocationTargetException | InterruptedException ex) {
                 JOptionPane.showMessageDialog(AnotherConcurrentGUI.this, ex.getMessage());
-            }
-            
+            } 
         }).start();
 
     }
